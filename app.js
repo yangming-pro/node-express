@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     // 定义一个输出的函数
     res.output = function (
         err,
-        status = 1,
+        status = 500,
         data
     ) {
         res.send({
