@@ -2,6 +2,7 @@
 const db = require("../db/index");
 const JwtUtils = require("../utils/tokenUtil");
 const moment = require("moment");
+
 // 获取用户信息的处理函数
 exports.getAllInfor = (req, res) => {
 	// 定义查询的sql语句
@@ -62,7 +63,7 @@ exports.login = (req, res) => {
 	const tokenStr = JwtUtils.sign(
 		{ username: params.username },
 		{
-			expiresIn: "30s",
+			expiresIn: 60 * 60 * 24,
 		}
 	);
 	db.query(sql, params, (err, results) => {

@@ -1,10 +1,15 @@
 // 引入express
 const express = require("express");
+//解决接口跨域问题
+const cors = require("cors");
 // 创建服务器的实例对象
 const app = express();
-
+const JwtUtils = require("./utils/tokenUtil");
 // 配置解析表单数据的中间件  内置中间件，只能解析application/x-www-form-urlencoded格式的数据
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
+app.use(JwtUtils.verify());
+//如果出现报错 尝试在 secret: secretKey的后面加上 ", algorithms: ['HS256'] "
 /**
  * 还有自定义中间，自定义中间件最后必须加next()方法
  */
