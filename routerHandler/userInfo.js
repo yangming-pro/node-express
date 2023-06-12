@@ -63,7 +63,7 @@ exports.login = (req, res) => {
 	const tokenStr = JwtUtils.sign(
 		{ username: params.username },
 		{
-			expiresIn: 60 * 60 * 24,
+			expiresIn: 60 * 60 * 24 * 3,
 		}
 	);
 	db.query(sql, params, (err, results) => {
