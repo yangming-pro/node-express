@@ -32,6 +32,20 @@ app.use((req, res, next) => {
 	next();
 });
 
+// 错误处理中间件
+app.use((err, req, res, next) => {
+	if (err.name == "UnauthorizedError") {
+		return res.send({
+			status: 401,
+			message: "无效的Token",
+		});
+	}
+	return res.send({
+		status: 500,
+		message: "未知的错误",
+	});
+});
+
 // 导入并使用路由模块
 const inforRouter = require("./router/userInfo");
 app.use(inforRouter);
