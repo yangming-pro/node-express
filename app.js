@@ -41,8 +41,8 @@ app.use((err, req, res, next) => {
 		});
 	}
 	return res.send({
-		status: 500,
-		message: "未知的错误",
+		status: err.status || 500,
+		message: err.inner.message || "未知的错误",
 	});
 });
 
