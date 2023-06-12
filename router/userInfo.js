@@ -8,6 +8,8 @@ const infoHandler = require("../routerHandler/userInfo");
 router.get("/info", infoHandler.getAllInfor);
 // 通过id查找用户name
 router.get("/infoById", infoHandler.getNameById);
+// 登录接口
+router.post("/login", infoHandler.login);
 // 注册接口
 router.post("/register", infoHandler.register);
 // 向外共享路由对象
