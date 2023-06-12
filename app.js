@@ -16,22 +16,15 @@ app.use(express.urlencoded({ extended: false }));
  * 封装之后不需要写这么多
  */
 app.use((req, res, next) => {
-    // 定义一个输出的函数
-    res.output = function (
-        err,
-        status = 500,
-        data
-    ) {
-        res.send({
-            status,
-            message:
-                err instanceof Error
-                    ? err.message
-                    : err,
-            data,
-        });
-    };
-    next();
+	// 定义一个输出的函数
+	res.output = function (err, status = 500, data) {
+		res.send({
+			status,
+			message: err instanceof Error ? err.message : err,
+			data,
+		});
+	};
+	next();
 });
 
 // 导入并使用路由模块
@@ -40,7 +33,5 @@ app.use(inforRouter);
 
 // 启动服务器
 app.listen(3007, () => {
-    console.log(
-        "Server running at http://127.0.0.1:3007"
-    );
+	console.log("Server running at http://127.0.0.1:3007");
 });

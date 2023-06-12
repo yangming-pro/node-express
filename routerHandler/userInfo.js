@@ -1,5 +1,6 @@
 // 导入数据库操作模块
 const db = require("../db/index");
+const JwtUtils = require("../utils/tokenUtil");
 const moment = require("moment");
 // 获取用户信息的处理函数
 exports.getAllInfor = (req, res) => {
@@ -56,11 +57,18 @@ exports.login = (req, res) => {
 		"select `username`,`password`,`createdAt` from user where username = ? and password = ?";
 	// 执行sql语句，req获取从前端传的值
 	const params = [req.body.username, req.body.password];
-	// 如果params是对象形式，可以使用Object.values(params)
+	// jwt token其实就是通过username、secretKey、expiresIn的值生成的
+	//
+	const tokenStr = JwtUtils.sign(
+		{ username: params.username },
+		{
+			expiresIn: "30s",
+		}
+	);
 	db.query(sql, params, (err, results) => {
 		// 执行sql语句失败
 		if (err) return res.output(err);
 		// 执行成功
-		res.output("执行成功!", 200, results);
+		res.output("登录成功!", 200, { ...results[0], token: tokenStr });
 	});
 };
