@@ -14,5 +14,7 @@ router.post("/sys/login", infoHandler.login);
 router.post("/sys/register", infoHandler.register);
 // 获取用户信息
 router.get("/user/profile", infoHandler.getProfile);
+// 更改用户信息
+router.put("/user/profile", infoHandler.updateProfile);
 // 向外共享路由对象
 module.exports = router;
