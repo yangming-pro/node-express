@@ -35,7 +35,7 @@ exports.getNameById = (req, res) => {
 exports.register = (req, res) => {
 	// 定义sql语句
 	const sql =
-		"Insert into user(`username`,`password`,`createdAt`) values(?,?,?)";
+		"Insert into user(`username`,`password`,`created_at`) values(?,?,?)";
 	// 执行sql语句，req获取从前端传的值
 	const params = [
 		req.body.username,
@@ -55,7 +55,7 @@ exports.register = (req, res) => {
 exports.login = (req, res) => {
 	// 定义sql语句
 	const sql =
-		"select `username`,`password`,`createdAt` from user where username = ? and password = ?";
+		"select `username`,`password`,`created_at` from user where username = ? and password = ?";
 	// 执行sql语句，req获取从前端传的值
 	const params = [req.body.username, req.body.password];
 	// jwt token其实就是通过username、secretKey、expiresIn的值生成的
@@ -71,5 +71,19 @@ exports.login = (req, res) => {
 		if (err) return res.output(err);
 		// 执行成功
 		res.output("登录成功!", 200, { ...results[0], token: tokenStr });
+	});
+};
+
+// 获取用户信息的处理函数
+exports.getProfile = (req, res) => {
+	// 定义查询的sql语句;
+	const sql =
+		"select username,created_at,avatar,nickname,home_page,introduction,job_title from user where username = ?";
+	// 执行sql语句
+	db.query(sql, req.headers.username, (err, results) => {
+		// 执行sql语句失败
+		if (err) return res.output(err);
+		// 执行成功
+		res.output("查询成功", 200, results);
 	});
 };

@@ -12,5 +12,7 @@ router.get("/infoById", infoHandler.getNameById);
 router.post("/sys/login", infoHandler.login);
 // 注册接口
 router.post("/sys/register", infoHandler.register);
+// 获取用户信息
+router.get("/user/profile", infoHandler.getProfile);
 // 向外共享路由对象
 module.exports = router;
