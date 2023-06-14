@@ -12,6 +12,8 @@ router.get("/infoById", infoHandler.getNameById);
 router.post("/sys/login", infoHandler.login);
 // 注册接口
 router.post("/sys/register", infoHandler.register);
+// 获取分类接口
+router.get("/sys/category", infoHandler.getCategory);
 // 获取用户信息
 router.get("/user/profile", infoHandler.getProfile);
 // 更改用户信息

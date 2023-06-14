@@ -136,3 +136,15 @@ exports.getHints = (req, res) => {
 		res.output("查询成功", 200, array);
 	});
 };
+
+exports.getCategory = (req, res) => {
+	// 定义查询的sql语句;
+	const sql = "select * from category";
+	// 执行sql语句
+	db.query(sql, (err, results) => {
+		// 执行sql语句失败
+		if (err) return res.output(err);
+		// 执行成功
+		res.output("查询成功", 200, results);
+	});
+};
