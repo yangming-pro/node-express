@@ -1,19 +1,12 @@
 // 导入数据库操作模块
 const db = require("../db/index");
 const JwtUtils = require("../utils/tokenUtil");
+const runData = require("../utils/runData");
 const moment = require("moment");
 
-// 获取用户信息的处理函数
-exports.getAllInfor = (req, res) => {
-	// 定义查询的sql语句
-	const sql = "select * from user";
-	// 执行sql语句
-	db.query(sql, (err, results) => {
-		// 执行sql语句失败
-		if (err) return res.output(err);
-		// 执行成功
-		res.output("查询成功", 200, results);
-	});
+// 往数据库里批量跑数据的函数
+exports.runData = (req, res) => {
+	runData.insertData(req, res);
 };
 
 // 通过id查找用户name,处理函数
