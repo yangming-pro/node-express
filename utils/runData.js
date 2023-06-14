@@ -38,17 +38,12 @@ const mockData = [
 ];
 
 exports.insertData = (req, res) => {
-	mockData.map((item) => {
-		// 定义sql语句
+	mockData.map(async (item, index) => {
 		const sql = "insert into themes(`id`,`photo`,`title`) values(?,?,?)";
-		// 执行sql语句，req获取从前端传的值
 		const params = [item.id, item.photo, item.title];
-		// 如果params是对象形式，可以使用Object.values(params)
+		// db.query是异步方法，所以写入数据顺序会乱，如果对顺序性有要求，则需要改为同步方法
 		db.query(sql, params, (err, results) => {
-			// 执行sql语句失败;
-			if (err) return res.output(err);
-			// 执行成功
-			res.output("执行成功!", 200, results);
+			return;
 		});
 	});
 };
