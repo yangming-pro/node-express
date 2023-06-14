@@ -18,5 +18,7 @@ router.get("/user/profile", infoHandler.getProfile);
 router.put("/user/profile", infoHandler.updateProfile);
 // 获取推荐主题
 router.get("/pexels/themes", infoHandler.getThemes);
+// 搜索关键词hint
+router.get("/pexels/hint", infoHandler.getHints);
 // 向外共享路由对象
 module.exports = router;

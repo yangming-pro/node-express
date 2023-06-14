@@ -119,3 +119,19 @@ exports.getThemes = (req, res) => {
 		res.output("更新成功", 200, results);
 	});
 };
+
+// 搜索关键词hint的处理函数
+exports.getHints = (req, res) => {
+	// 定义查询的sql语句;
+	// const sql =
+	// 	"select username,created_at,avatar,nickname,home_page,introduction,job_title from user where username = ?";
+	const sql = "select * from hints where name like concat('%', ?, '%')";
+	const params = [req.body.q];
+	// 执行sql语句
+	db.query(sql, params, (err, results) => {
+		// 执行sql语句失败
+		if (err) return res.output(err);
+		// 执行成功
+		res.output("查询成功", 200, results);
+	});
+};
