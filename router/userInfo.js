@@ -16,5 +16,7 @@ router.post("/sys/register", infoHandler.register);
 router.get("/user/profile", infoHandler.getProfile);
 // 更改用户信息
 router.put("/user/profile", infoHandler.updateProfile);
+// 获取推荐主题
+router.get("/pexels/themes", infoHandler.getThemes);
 // 向外共享路由对象
 module.exports = router;
