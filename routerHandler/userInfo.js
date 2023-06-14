@@ -105,23 +105,14 @@ exports.updateProfile = (req, res) => {
 	});
 };
 
-// 更新用户信息的处理函数
+// 获取推荐主题的处理函数
 exports.getThemes = (req, res) => {
 	// 定义查询的sql语句;
 	// const sql =
 	// 	"select username,created_at,avatar,nickname,home_page,introduction,job_title from user where username = ?";
-	const sql = `update user set updated_at = ?,avatar = ?,nickname = ?,home_page = ?,introduction = ?,job_title = ? where username = ?`;
-	const params = [
-		moment().format("YYYY-MM-DD HH:mm:ss"),
-		req.body.avatar,
-		req.body.nickname,
-		req.body.home_page,
-		req.body.introduction,
-		req.body.job_title,
-		req.headers.username,
-	];
+	const sql = `select * from themes order by rand() limit 7`;
 	// 执行sql语句
-	db.query(sql, params, (err, results) => {
+	db.query(sql, (err, results) => {
 		// 执行sql语句失败
 		if (err) return res.output(err);
 		// 执行成功
