@@ -132,6 +132,7 @@ exports.getHints = (req, res) => {
 		// 执行sql语句失败
 		if (err) return res.output(err);
 		// 执行成功
-		res.output("查询成功", 200, results);
+		const array = results.map((item) => item.name);
+		res.output("查询成功", 200, array);
 	});
 };
