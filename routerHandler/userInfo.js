@@ -149,3 +149,16 @@ exports.getCategory = (req, res) => {
 		res.output("查询成功", 200, results);
 	});
 };
+
+// 获取用户vip列表的处理函数
+exports.getVipList = (req, res) => {
+	// 定义查询的sql语句;
+	const sql = "select * from vip_info order by id asc";
+	// 执行sql语句
+	db.query(sql, (err, results) => {
+		// 执行sql语句失败
+		if (err) return res.output(err);
+		// 执行成功
+		res.output("查询成功", 200, results);
+	});
+};
