@@ -137,6 +137,7 @@ exports.getHints = (req, res) => {
 	});
 };
 
+// 获取分类的处理函数
 exports.getCategory = (req, res) => {
 	// 定义查询的sql语句;
 	const sql = "select * from category";
