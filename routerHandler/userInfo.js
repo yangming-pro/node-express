@@ -186,3 +186,17 @@ exports.getPhotoList = (req, res) => {
 		});
 	});
 };
+
+// 获取指定图片的数据详情
+exports.getPhotoItem = (req, res) => {
+	const { id } = req.params;
+	// 定义查询的sql语句;
+	const sql = "select * from photos where id = ?";
+	// 执行sql语句
+	db.query(sql, id, (err, results) => {
+		// 执行sql语句失败
+		if (err) return res.output(err);
+		// 执行成功
+		res.output("查询成功", 200, results);
+	});
+};

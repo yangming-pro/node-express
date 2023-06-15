@@ -26,5 +26,7 @@ router.get("/pexels/themes", infoHandler.getThemes);
 router.get("/pexels/hint", infoHandler.getHints);
 // 获取图片列表的分页处理函数
 router.get("/pexels/list", infoHandler.getPhotoList);
+// 获取指定图片的数据详情
+router.get("/pexels/:id", infoHandler.getPhotoItem);
 // 向外共享路由对象
 module.exports = router;
