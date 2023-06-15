@@ -24,5 +24,7 @@ router.put("/user/profile", infoHandler.updateProfile);
 router.get("/pexels/themes", infoHandler.getThemes);
 // 搜索关键词hint
 router.get("/pexels/hint", infoHandler.getHints);
+// 获取图片列表的分页处理函数
+router.get("/pexels/list", infoHandler.getPhotoList);
 // 向外共享路由对象
 module.exports = router;

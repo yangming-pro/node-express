@@ -162,3 +162,27 @@ exports.getVipList = (req, res) => {
 		res.output("查询成功", 200, results);
 	});
 };
+// 获取图片列表的分页处理函数
+exports.getPhotoList = (req, res) => {
+	const size = parseInt(req.body.size) || 10; // 每页显示的记录数，默认为10
+	const page = parseInt(req.body.page) || 1; // 当前页数，默认为第1页
+	const countSql = "SELECT COUNT(*) AS count FROM photos";
+	const dataSql = `SELECT * FROM photos LIMIT ${size} OFFSET ${
+		(page - 1) * size
+	}`;
+	db.query(countSql, (err, countResult) => {
+		if (err) return res.output(err); // 执行 SQL 失败
+		const count = countResult[0].count; // 获取总数据条数
+
+		// 执行查询数据的 SQL 语句
+		db.query(dataSql, (err, dataResults) => {
+			if (err) return res.output(err); // 执行 SQL 失败
+			res.output("查询成功", 200, {
+				count,
+				page,
+				size,
+				list: dataResults,
+			});
+		});
+	});
+};
